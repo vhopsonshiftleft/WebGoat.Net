@@ -1,7 +1,6 @@
 name: .NET
 
 on:
-  push:
   pull_request:
   workflow_dispatch:
 
@@ -13,13 +12,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 5.0.x
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v1
 
-    - name: Restore dependencies
-      run: dotnet restore
-
-    - name: Build
-      run: dotnet build WebGoat.Net.sln
+    - name: Build WebGoat.NET
+      run: msbuild WebGoat.Net.sln
